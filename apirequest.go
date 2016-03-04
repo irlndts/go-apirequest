@@ -43,6 +43,7 @@ func (s *API) New() *API {
 	for k, v := range s.header {
 		headerCopy[k] = v
 	}
+
 	return &API{
 		httpClient:   s.httpClient,
 		method:       s.method,
