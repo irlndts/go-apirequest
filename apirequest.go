@@ -3,6 +3,7 @@ package apirequest
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"github.com/google/go-querystring/query"
 	"io"
 	"io/ioutil"
@@ -148,6 +149,7 @@ func (s *API) Request() (*http.Request, error) {
 		return nil, err
 	}
 	err = addQueryStructs(reqURL, s.queryStructs)
+	fmt.Println(reqURL)
 	if err != nil {
 		return nil, err
 	}
@@ -176,7 +178,7 @@ func addQueryStructs(reqURL *url.URL, queryStructs []interface{}) error {
 		}
 		for key, values := range queryValues {
 			for _, value := range values {
-				urlValues.Add(key, value)
+				urlValues.Add(strings.ToLower(key), value)
 			}
 		}
 	}
